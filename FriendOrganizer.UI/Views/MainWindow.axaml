@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FriendOrganizer.UI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FriendOrganizer.UI.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="FriendOrganizer" MinWidth="260" MinHeight="300" Height="350" Width="525" FontSize="20">
+
+  <Grid ColumnDefinitions="30* 70*">
+    <!-- Main Content -->
+
+    <Grid>
+      <ListBox Grid.Column="0" SelectedItem="{Binding SelectedFriend,Mode=TwoWay}" Items="{Binding Friends}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="{} {0} {1}">
+                  <Binding Path="FirstName" Mode="TwoWay"/>
+                  <Binding Path="LastName" Mode="TwoWay"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+    </Grid>
+    
+    
+    <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*">
+      
+      <Label Content="Firstname" Margin="10 10 10 0"/>
+      <TextBox Grid.Row="1" Text="{Binding SelectedFriend.FirstName,
+        Mode=TwoWay}" Margin="10 0 10 10" TextWrapping="Wrap" MaxLength="50"/>
+
+      <Label Grid.Row="2" Content="Lastname" Margin="10 0"/>
+      <TextBox Grid.Row="3" Text="{Binding SelectedFriend.LastName,
+        Mode=TwoWay}" Margin="10 0 10 10" TextWrapping="Wrap" MaxLength="50"/>
+
+      <Label Grid.Row="4" Content="Email" Margin="10 0"/>
+      <TextBox Grid.Row="5" Text="{Binding SelectedFriend.Email,
+        Mode=TwoWay}" Margin="10 0 10 10" TextWrapping="Wrap" MaxLength="50"/>
+      
+    </Grid>
+
+  </Grid>  
+
+</Window>
